@@ -12,7 +12,7 @@ export const otpget = createSlice({
     initialState,
     reducers:{
         setotpverify:(state,action)=>{
-            // state.otp = action.payload
+            state.otp = action.payload
             console.log(state.otp, "otp state")
             return state
         },

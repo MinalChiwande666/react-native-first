@@ -1,9 +1,11 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useSelector } from 'react-redux'
 const Singlecom = ({ navigation, name }) => {
     console.log("name => ", name)
     const [singleproduct, setsingleproduct] = useState({})
+    const user = useSelector((state)=>{return state.phoneotp.otp})
     // http://192.168.0.123:8080/product?productName=analog watch
     const getsingleproduct = async () => {
         let singlepro = await fetch(`http://192.168.0.123:8080/product?productName=${name}`)
@@ -14,6 +16,27 @@ const Singlecom = ({ navigation, name }) => {
     useEffect(() => {
         getsingleproduct()
     }, [])
+
+    const addtocart = async()=>{
+        let cartobj = {
+            userId:user.id,
+            productId:singleproduct.id,
+            quantity:singleproduct.quantity
+        }
+        console.log(cartobj)
+        await fetch('http://192.168.0.123:8080/cart',{
+            method:'POST',
+            body:JSON.stringify(cartobj),
+            headers:{
+                'Content-Type':'application/json'
+            },
+
+        }).then((data)=>{
+            return data.json()
+        }).then((res)=>{
+            console.log(res)
+        })
+    }
     return (
         
         <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -45,7 +68,11 @@ const Singlecom = ({ navigation, name }) => {
                  <Text style={style.proprice}>Rs.{singleproduct.price}</Text>
                  <Text style={[style.proprice,{fontSize:20}]}>Discount:{singleproduct.discount}%</Text>
             </View>
-            <TouchableOpacity style={style.cartaddbtn}>
+            <TouchableOpacity 
+            onPress={()=>{
+                addtocart()
+            }}
+            style={style.cartaddbtn}>
                 <Text style={style.carttxt}>+ Add To Cart</Text>
             </TouchableOpacity>
 

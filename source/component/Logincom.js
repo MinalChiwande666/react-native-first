@@ -37,7 +37,7 @@ const Logincom = ({ navigation }) => {
     ]
   )
   const getuser = async()=>{
-    let userlist = await fetch('http://192.168.0.105:8080/userList');
+    let userlist = await fetch('http://192.168.0.123:8080/userList');
     let users = await userlist.json()
     console.log(users)
     setuserslist(users)
@@ -45,14 +45,14 @@ const Logincom = ({ navigation }) => {
 
   }
   useEffect(()=>{
-    
+  
     getuser()
   },[])
   const getusersave = async(username)=>{
     if(username)
     {
-      await AsyncStorage.setItem('user',JSON.stringify(username))
-      dispatch(otpget.actions.setotpverify(username))
+      // await AsyncStorage.setItem('user',JSON.stringify(username))
+      // dispatch(otpget.actions.setotpverify(username))
     // userlists.filter((usern)=>{
     //   if(usern.username === username)
     //   {
@@ -62,8 +62,8 @@ const Logincom = ({ navigation }) => {
     //     navigation.navigate('App')
     //   }
     //  })
-    // dispatch(otpget.actions.setotpverify(username))
-      // navigation.navigate('App')
+    dispatch(otpget.actions.setotpverify(username))
+      navigation.navigate('App')
     }
     
   }

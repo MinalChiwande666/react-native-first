@@ -30,8 +30,8 @@ const Header = ({ navigation }) => {
   }
 
   const logout = async()=>{
-  await AsyncStorage.removeItem('user')
-  // dispatch(otpget.actions.setlogout(null))
+  // await AsyncStorage.removeItem('user')
+  dispatch(otpget.actions.setlogout(null))
   // navigation.navigate('Auth')
   }
   useEffect(() => {

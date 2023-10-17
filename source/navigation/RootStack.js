@@ -31,7 +31,7 @@ const RootStack = () => {
                 
             >
                 {
-                    authuser === '' || authuser === null ? (
+                    otpverify === '' || otpverify === null ? (
                         <RootStack.Screen name='Auth' component={AuthNavigation} />) :
                        <RootStack.Screen name='App' component={Navigation1} /> 
                             

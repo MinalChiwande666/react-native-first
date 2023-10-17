@@ -40,7 +40,8 @@ const TypeFood = ({navigation,scrollindex}) => {
   const [typename,setname] = useState('')
 
   return (
-    <View style={{paddingVertical:20,height:animatedheader,backgroundColor:'white'}}>
+    <View style={{paddingVertical:20,padding:10,height:140,borderTopEndRadius:20,borderTopStartRadius:20,backgroundColor:'#fff'}}>
+      <Text style={styles.catheadtxt}>Food Category</Text>
       <FlatList
      
         data={typefood}
@@ -71,30 +72,38 @@ const styles = StyleSheet.create({
     borderRadius: 50
   },
   typecard: {
-    width: 78,
+    width: 140,
     backgroundColor: 'orange',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 5,
-    justifyContent: 'center',
-    borderBottomEndRadius: 40,
-    borderBottomStartRadius: 35,
-    height: 80,
+    // justifyContent: 'space-between',
+    // borderBottomEndRadius: 40,
+    // borderBottomStartRadius: 35,
+    // height: 80,
     padding: 5,
     marginHorizontal:5,
-    elevation:6,
+    // elevation:6,
+    marginVertical:10
     
   },
+  catheadtxt:{
+   fontSize:20,
+   color:'black',
+   fontWeight:'800',
+   marginHorizontal:7
+  },
   typecard2: {
-    width: 78,
+    width: 140,
     backgroundColor: 'white',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 5,
-    justifyContent: 'center',
-    borderBottomEndRadius: 40,
-    borderBottomStartRadius: 35,
-    height: 80,
+    // justifyContent: 'center',
+    
+    // borderBottomEndRadius: 40,
+    // borderBottomStartRadius: 35,
+    marginVertical:10,
     padding: 5,
     marginHorizontal:5,
     elevation:6
@@ -103,13 +112,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 9,
     marginTop: 3,
-    textAlign:'center'
+    marginHorizontal:10
   },
   typetxt2: {
     color: '#000',
     fontSize: 9,
     marginTop: 3,
-    textAlign:'center'
+    marginHorizontal:10
+   
   }
 })
 export default TypeFood

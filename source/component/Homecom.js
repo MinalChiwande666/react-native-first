@@ -4,6 +4,7 @@ import Search from '../Shared/Search'
 import TypeFood from './TypeFood'
 import Carousel from './Carousel'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { interpolate } from 'react-native-reanimated'
 const Homecom = ({ navigation, mainadd }) => {
   console.log("main add=>", mainadd)
   const offers = [
@@ -18,31 +19,32 @@ const Homecom = ({ navigation, mainadd }) => {
   ]
   // const scrollindex = useRef(0)
   const scrollindex = useRef(new Animated.Value(0)).current
-
+ 
   return (
+    <><TypeFood scrollindex={scrollindex} navigation={navigation} />
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       {/* <Search/> */}
-      <TypeFood scrollindex={scrollindex}  navigation={navigation}/>
+
       <ScrollView
       >
-       
+
         <Carousel />
-        <View >
+        <View>
 
           <ScrollView
+          onScroll={Animated.event( [{ nativeEvent: { contentOffset: { y: scrollindex } } }],
+            { useNativeDriver: false })}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ padding: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
           >
-            {
-              offers.map((item, i) => (
-                <>
-                  <TouchableOpacity>
-                    <Image source={{ uri: item.image }} style={style.imagecard} />
-                  </TouchableOpacity>
-                </>
-              ))
-            }
+            {offers.map((item, i) => (
+              <>
+                <TouchableOpacity>
+                  <Image source={{ uri: item.image }} style={style.imagecard} />
+                </TouchableOpacity>
+              </>
+            ))}
           </ScrollView>
         </View>
         <View style={style.cardhomecon}>
@@ -61,7 +63,7 @@ const Homecom = ({ navigation, mainadd }) => {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </View></>
   )
 }
 
